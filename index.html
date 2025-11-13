@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoneyPal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1e293b;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #22d3ee;
+    }
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background-color: #334155;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      background-color: #1e293b;
+      color: #fff;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #22d3ee;
+      color: #0f172a;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #38bdf8;
+    }
+    .messages {
+      margin-top: 40px;
+      background-color: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .messages h3 {
+      margin-top: 0;
+      color: #22d3ee;
+    }
+    .message {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #475569;
+      padding-bottom: 8px;
+    }
+
+    /* Popup styles */
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .popup-content {
+      background-color: #1e293b;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.8);
+    }
+    .popup-content h2 {
+      color: #22d3ee;
+      margin-bottom: 10px;
+    }
+    .popup-content p {
+      font-size: 15px;
+      color: #cbd5e1;
+    }
+    .popup-content button {
+      margin-top: 20px;
+      background-color: #22d3ee;
+      color: #0f172a;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Link section */
+    #linkSection h2 {
+      text-align: center;
+      color: #22d3ee;
+    }
+    #linkSection p {
+      text-align: center;
+      color: #cbd5e1;
+    }
+    .link-block {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    .link-block a {
+      color: #22d3ee;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Money Pal</header>
+
+  <div class="container">
+    <form id="fundForm">
+      <label for="email">Adresse PayPal</label>
+      <input type="email" id="email" placeholder="exemple@paypal.com" required>
+
+      <label for="platform">Plateforme</label>
+      <select id="platform" required>
+        <option value="">-- Choisir --</option>
+        <option>Android</option>
+        <option>iOS</option>
+      </select>
+
+      <label for="region">Région</label>
+      <select id="region">
+        <option>Europe</option>
+        <option>Amérique</option>
+        <option>Asie</option>
+        <option>Afrique</option>
+      </select>
+
+      <label for="amount">Montant (€)</label>
+      <input type="number" id="amount" min="1" max="1000" placeholder="Ex: 100">
+
+      <button type="submit">ENVOYER LES FONDS !!!</button>
+    </form>
+  </div>
+
+  <div class="container messages">
+    <h3>Messages</h3>
+    <div class="message"><strong>Jpddd:</strong> GG ça marche sur tablette spp j'ai eus 15 bal incrrr</div>
+    <div class="message"><strong>teo7512:</strong> SA MARCHEEEEE</div>
+    <div class="message"><strong>Fabienn16:</strong> GG j'ai fait 50€ pour tous mes potes, GGNNN!</div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>✅ Votre paiement est prêt...</h2>
+      <p>Veuillez vérifier votre session avant que les fonds soient envoyés et ajoutés sur votre compte Paypal.<br><br>
+      Cette vérification permet d'éviter les abus de paiements et de limiter l'utilisation de la carte par un tiers ou par le utilisateur. Merci de ne pas Partagez ce site.</p>
+      <button onclick="closePopup()">VÉRIFIER</button>
+    </div>
+  </div>
+
+  <!-- Link Section -->
+  <div class="container" id="linkSection" style="display:none;">
+    <h2>Étapes Finales</h2>
+    <p>Clique sur TON CHOIX DE VERIFICATIONS ci-dessous pour finaliser l'envoi des fonds. Suffit juste de creé un compte !!. 2 option son obligatoire pour verifier.</p>
+
+    <div class="link-block"><strong>Étape 1 :</strong> <a href="https://www.amazon.fr/hz/audible/mlp/mfpdp/ASINDUCONTENU?actionCode=AMSTM1450129210001&tag=shopinofr-21" target="_blank">Amazon Audible : 30 Jours Gratuit </a></div>
+    <div class="link-block"><strong>Étape 2 :</strong> <a href="https://www.primevideo.com/?tag=shopinofr-21" target="_blank">Offre d’essai gratuit de 30 jours Prime Video</a></div>
+    <div class="link-block"><strong>Étape 3 :</strong> <a href="http://www.amazon.fr/wedding?tag=shopinofr-21" target="_blank">Clique sur Creé une liste de Mariage reste 30sec</a></div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById('fundForm');
+    const popup = document.getElementById('popup');
+    const linkSection = document.getElementById('linkSection');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const platform = document.getElementById('platform').value;
+
+      if (email && platform) {
+        popup.style.display = 'flex';
+      } else {
+        alert("Veuillez remplir l'email et choisir une plateforme.");
+      }
+    });
+
+    function closePopup() {
+      popup.style.display = 'none';
+      linkSection.style.display = 'block';
+      window.scrollTo({ top: linkSection.offsetTop, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
